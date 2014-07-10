@@ -288,13 +288,28 @@
         bullet.position = CGPointMake(bulletBeginning,110);
         bullet.color = [SKColor redColor];
         bullet.colorBlendFactor = 0.5;
-        
         float duration = (2 * location.y)/sizeGlobal.width;
-        
         SKAction *move =[SKAction moveTo:CGPointMake(location.x,location.y) duration:duration];
         SKAction *remove = [SKAction removeFromParent];
         
-        [bullet runAction:[SKAction sequence:@[move,remove]]];
+        // Explosion
+        SKAction *callExplosion = [SKAction runBlock:^{
+            SKSpriteNode *explosion = [SKSpriteNode spriteNodeWithImageNamed:@"explosion"];
+            explosion.zPosition = 3;
+            explosion.scale = 0.1;
+            explosion.position = CGPointMake(location.x,location.y);
+            explosion.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:explosion.size.height/2];
+            explosion.physicsBody.dynamic = YES;
+            explosion.physicsBody.categoryBitMask = ExplosionCategory;
+            explosion.physicsBody.contactTestBitMask = MissileCategory;
+            explosion.physicsBody.collisionBitMask = 1;
+            SKAction *explosionAction = [SKAction scaleTo:0.8 duration:1.5];
+            [explosion runAction:[SKAction sequence:@[explosionAction,remove]]];
+            [self addChild:explosion];
+        }];
+        
+        [bullet runAction:[SKAction sequence:@[move,callExplosion,remove]]];
+        
         [self addChild:bullet];
     }
 }
