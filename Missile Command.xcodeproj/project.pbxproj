@@ -24,6 +24,17 @@
 		EA297CA6196F0A6D008B954A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA297C81196F0A6D008B954A /* UIKit.framework */; };
 		EA297CAE196F0A6D008B954A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA297CAC196F0A6D008B954A /* InfoPlist.strings */; };
 		EA297CB0196F0A6D008B954A /* Missile_CommandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA297CAF196F0A6D008B954A /* Missile_CommandTests.m */; };
+		EA297CC3196F0AD9008B954A /* enemyMissile.png in Resources */ = {isa = PBXBuildFile; fileRef = EA297CBA196F0AD9008B954A /* enemyMissile.png */; };
+		EA297CC4196F0AD9008B954A /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = EA297CBB196F0AD9008B954A /* explosion.png */; };
+		EA297CC5196F0AD9008B954A /* flower.png in Resources */ = {isa = PBXBuildFile; fileRef = EA297CBC196F0AD9008B954A /* flower.png */; };
+		EA297CC6196F0AD9008B954A /* flowerBullet.png in Resources */ = {isa = PBXBuildFile; fileRef = EA297CBD196F0AD9008B954A /* flowerBullet.png */; };
+		EA297CC7196F0AD9008B954A /* multiBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = EA297CBE196F0AD9008B954A /* multiBtn.png */; };
+		EA297CC8196F0AD9008B954A /* protectCreature2.png in Resources */ = {isa = PBXBuildFile; fileRef = EA297CBF196F0AD9008B954A /* protectCreature2.png */; };
+		EA297CC9196F0AD9008B954A /* protectCreature4.png in Resources */ = {isa = PBXBuildFile; fileRef = EA297CC0196F0AD9008B954A /* protectCreature4.png */; };
+		EA297CCA196F0AD9008B954A /* singleBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = EA297CC1196F0AD9008B954A /* singleBtn.png */; };
+		EA297CCB196F0AD9008B954A /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = EA297CC2196F0AD9008B954A /* title.png */; };
+		EA297CCE196F0B00008B954A /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EA297CCD196F0B00008B954A /* MenuScene.m */; };
+		EA297CD1196F0B0E008B954A /* MultiScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EA297CD0196F0B0E008B954A /* MultiScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +71,19 @@
 		EA297CAB196F0A6D008B954A /* Missile CommandTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Missile CommandTests-Info.plist"; sourceTree = "<group>"; };
 		EA297CAD196F0A6D008B954A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EA297CAF196F0A6D008B954A /* Missile_CommandTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Missile_CommandTests.m; sourceTree = "<group>"; };
+		EA297CBA196F0AD9008B954A /* enemyMissile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemyMissile.png; sourceTree = "<group>"; };
+		EA297CBB196F0AD9008B954A /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion.png; sourceTree = "<group>"; };
+		EA297CBC196F0AD9008B954A /* flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flower.png; sourceTree = "<group>"; };
+		EA297CBD196F0AD9008B954A /* flowerBullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flowerBullet.png; sourceTree = "<group>"; };
+		EA297CBE196F0AD9008B954A /* multiBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiBtn.png; sourceTree = "<group>"; };
+		EA297CBF196F0AD9008B954A /* protectCreature2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = protectCreature2.png; sourceTree = "<group>"; };
+		EA297CC0196F0AD9008B954A /* protectCreature4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = protectCreature4.png; sourceTree = "<group>"; };
+		EA297CC1196F0AD9008B954A /* singleBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = singleBtn.png; sourceTree = "<group>"; };
+		EA297CC2196F0AD9008B954A /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
+		EA297CCC196F0B00008B954A /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		EA297CCD196F0B00008B954A /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
+		EA297CCF196F0B0E008B954A /* MultiScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiScene.h; sourceTree = "<group>"; };
+		EA297CD0196F0B0E008B954A /* MultiScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +145,7 @@
 		EA297C85196F0A6D008B954A /* Missile Command */ = {
 			isa = PBXGroup;
 			children = (
+				EA297CB9196F0AD9008B954A /* Resources */,
 				EA297C8E196F0A6D008B954A /* AppDelegate.h */,
 				EA297C8F196F0A6D008B954A /* AppDelegate.m */,
 				EA297C91196F0A6D008B954A /* Main.storyboard */,
@@ -131,6 +156,10 @@
 				EA297C9A196F0A6D008B954A /* Spaceship.png */,
 				EA297C9C196F0A6D008B954A /* Images.xcassets */,
 				EA297C86196F0A6D008B954A /* Supporting Files */,
+				EA297CCC196F0B00008B954A /* MenuScene.h */,
+				EA297CCD196F0B00008B954A /* MenuScene.m */,
+				EA297CCF196F0B0E008B954A /* MultiScene.h */,
+				EA297CD0196F0B0E008B954A /* MultiScene.m */,
 			);
 			path = "Missile Command";
 			sourceTree = "<group>";
@@ -162,6 +191,22 @@
 				EA297CAC196F0A6D008B954A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA297CB9196F0AD9008B954A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA297CBA196F0AD9008B954A /* enemyMissile.png */,
+				EA297CBB196F0AD9008B954A /* explosion.png */,
+				EA297CBC196F0AD9008B954A /* flower.png */,
+				EA297CBD196F0AD9008B954A /* flowerBullet.png */,
+				EA297CBE196F0AD9008B954A /* multiBtn.png */,
+				EA297CBF196F0AD9008B954A /* protectCreature2.png */,
+				EA297CC0196F0AD9008B954A /* protectCreature4.png */,
+				EA297CC1196F0AD9008B954A /* singleBtn.png */,
+				EA297CC2196F0AD9008B954A /* title.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,8 +287,17 @@
 			files = (
 				EA297C8A196F0A6D008B954A /* InfoPlist.strings in Resources */,
 				EA297C9D196F0A6D008B954A /* Images.xcassets in Resources */,
+				EA297CCB196F0AD9008B954A /* title.png in Resources */,
+				EA297CCA196F0AD9008B954A /* singleBtn.png in Resources */,
+				EA297CC6196F0AD9008B954A /* flowerBullet.png in Resources */,
 				EA297C9B196F0A6D008B954A /* Spaceship.png in Resources */,
+				EA297CC5196F0AD9008B954A /* flower.png in Resources */,
+				EA297CC4196F0AD9008B954A /* explosion.png in Resources */,
+				EA297CC7196F0AD9008B954A /* multiBtn.png in Resources */,
+				EA297CC8196F0AD9008B954A /* protectCreature2.png in Resources */,
 				EA297C93196F0A6D008B954A /* Main.storyboard in Resources */,
+				EA297CC3196F0AD9008B954A /* enemyMissile.png in Resources */,
+				EA297CC9196F0AD9008B954A /* protectCreature4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,8 +317,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA297C99196F0A6D008B954A /* MyScene.m in Sources */,
+				EA297CCE196F0B00008B954A /* MenuScene.m in Sources */,
 				EA297C96196F0A6D008B954A /* ViewController.m in Sources */,
 				EA297C90196F0A6D008B954A /* AppDelegate.m in Sources */,
+				EA297CD1196F0B0E008B954A /* MultiScene.m in Sources */,
 				EA297C8C196F0A6D008B954A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
