@@ -145,7 +145,114 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
+        
+        // Return if User Taps Below a Flower
+        if (location.y < 120) return;
+        
+        int bulletBeginning = 0;
+        
+        if (location.x >= 0 && location.x < position) {
+            bulletBeginning = position-position/2;
+            
+            if (flowerBullets1 > 0)
+                flowerBullets1--;
+            else{
+                if(flowerBullets1 == 0 && flowerBullets2 > 0){
+                    flowerBullets2--;
+                    [labelflowerBullets2 setText:[NSString stringWithFormat:@"%d",flowerBullets2]];
+                    bulletBeginning = [self positionOfWhichFlowerShouldBegin:2];
+                }
+                else if(flowerBullets3 > 0){
+                    flowerBullets3--;
+                    [labelflowerBullets3 setText:[NSString stringWithFormat:@"%d",flowerBullets3]];
+                    bulletBeginning =[self positionOfWhichFlowerShouldBegin:3];
+                }
+                else{
+                    return;
+                }
+            }
+            [labelflowerBullets1 setText:[NSString stringWithFormat:@"%d",flowerBullets1]];
+        }
+        else if((location.x >= position && location.x < position*2)){
+            bulletBeginning = position*2-position/2;
+            if(flowerBullets2 > 0)
+                flowerBullets2--;
+            else{
+                if(location.x < sizeGlobal.width/2){
+                    if(flowerBullets1 > 0){
+                        flowerBullets1--;
+                        [labelflowerBullets1 setText:[NSString stringWithFormat:@"%d",flowerBullets1]];
+                        bulletBeginning =[self positionOfWhichFlowerShouldBegin:1];
+                    }
+                    else if (flowerBullets3 > 0){
+                        flowerBullets3--;
+                        [labelflowerBullets3 setText:[NSString stringWithFormat:@"%d",flowerBullets3]];
+                        bulletBeginning =[self positionOfWhichFlowerShouldBegin:3];
+                    }
+                    else{
+                        return;
+                    }
+                }
+                else{
+                    if(flowerBullets3 > 0){
+                        flowerBullets3--;
+                        [labelflowerBullets3 setText:[NSString stringWithFormat:@"%d",flowerBullets3]];
+                        bulletBeginning =[self positionOfWhichFlowerShouldBegin:3];
+                    }
+                    else if (flowerBullets1 > 0){
+                        flowerBullets1--;
+                        [labelflowerBullets1 setText:[NSString stringWithFormat:@"%d",flowerBullets1]];
+                        bulletBeginning =[self positionOfWhichFlowerShouldBegin:1];
+                    }
+                    else{
+                        return;
+                    }
+                }
+                
+            }
+            [labelflowerBullets2 setText:[NSString stringWithFormat:@"%d",flowerBullets2]];
+        }
+        else{
+            bulletBeginning = position*3-position/2;
+            if(flowerBullets3 > 0)
+                flowerBullets3--;
+            else{
+                if(flowerBullets3 == 0 && flowerBullets2 > 0){
+                    flowerBullets2--;
+                    [labelflowerBullets2 setText:[NSString stringWithFormat:@"%d",flowerBullets2]];
+                    bulletBeginning =[self positionOfWhichFlowerShouldBegin:2];
+                }
+                else if(flowerBullets1 > 0){
+                    flowerBullets1--;
+                    [labelflowerBullets1 setText:[NSString stringWithFormat:@"%d",flowerBullets1]];
+                    bulletBeginning =[self positionOfWhichFlowerShouldBegin:1];
+                }
+                else{
+                    return;
+                }
+            }
+            [labelflowerBullets3 setText:[NSString stringWithFormat:@"%d",flowerBullets3]];
+        }
+        
+        SKSpriteNode *bullet = [SKSpriteNode spriteNodeWithImageNamed:@"flowerBullet"];
+        bullet.zPosition = 1;
+        bullet.scale = 0.6;
+        bullet.position = CGPointMake(bulletBeginning,110);
+        bullet.color = [SKColor redColor];
+        bullet.colorBlendFactor = 0.5;
+        
+        float duration = (2 * location.y)/sizeGlobal.width;
+        
+        SKAction *move =[SKAction moveTo:CGPointMake(location.x,location.y) duration:duration];
+        SKAction *remove = [SKAction removeFromParent];
+        
+        [bullet runAction:[SKAction sequence:@[move,remove]]];
+        [self addChild:bullet];
     }
+}
+
+- (int)positionOfWhichFlowerShouldBegin:(int)number {
+    return position * number - position / 2;
 }
 
 -(void)update:(CFTimeInterval)currentTime {
