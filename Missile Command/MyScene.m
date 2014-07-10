@@ -68,6 +68,10 @@
         labelflowerBullets3.position = CGPointMake(position*3-position/2,labelflowerBullets3.frame.size.height/2);
         labelflowerBullets3.zPosition = 3;
         [self addChild:labelflowerBullets3];
+        
+        // Add Monsters
+        [self addMonstersBetweenSpace:1];
+        [self addMonstersBetweenSpace:2];
     }
     
     return self;
@@ -80,6 +84,30 @@
         flower.position = CGPointMake(position * i - position / 2, flower.size.height / 2);
         [self addChild:flower];
     }
+}
+
+- (void)addMonstersBetweenSpace:(int)spaceOrder {
+    for (int i = 0; i< 3; i++) {
+        int giveDistanceToMonsters = 60 * i -60;
+        int randomMonster = [self getRandomNumberBetween:0 to:1];
+        
+        SKSpriteNode *monster;
+        
+        if (randomMonster == 0) {
+            monster = [SKSpriteNode spriteNodeWithImageNamed:@"protectCreature4"];
+        } else {
+            monster = [SKSpriteNode spriteNodeWithImageNamed:@"protectCreature2"];
+        }
+        
+        monster.zPosition = 2;
+        monster.position = CGPointMake(position * spaceOrder - giveDistanceToMonsters, monster.size.height / 2);
+        
+        [self addChild:monster];
+    }
+}
+
+- (int)getRandomNumberBetween:(int)from to:(int)to {
+    return (int)from + arc4random() % (to - from + 1);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
