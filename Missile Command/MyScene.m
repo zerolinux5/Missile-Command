@@ -81,6 +81,10 @@
         
         SKAction *updateMissiles = [SKAction sequence:@[wait, createMissiles]];
         [self runAction:[SKAction repeatActionForever:updateMissiles]];
+        
+        // Configure Physics World
+        self.physicsWorld.gravity = CGVectorMake(0, 0);
+        self.physicsWorld.contactDelegate = self;
 
     }
     
@@ -102,15 +106,54 @@
         int randomMonster = [self getRandomNumberBetween:0 to:1];
         
         SKSpriteNode *monster;
+        CGMutablePathRef path = CGPathCreateMutable();
         
         if (randomMonster == 0) {
             monster = [SKSpriteNode spriteNodeWithImageNamed:@"protectCreature4"];
+            
+            CGFloat offsetX = monster.frame.size.width * monster.anchorPoint.x;
+            CGFloat offsetY = monster.frame.size.height * monster.anchorPoint.y;
+            CGPathMoveToPoint(path, NULL, 10 - offsetX, 1 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 42 - offsetX, 0 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 49 - offsetX, 13 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 51 - offsetX, 29 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 50 - offsetX, 42 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 42 - offsetX, 59 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 29 - offsetX, 67 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 19 - offsetX, 67 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 5 - offsetX, 53 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 0 - offsetX, 34 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 1 - offsetX, 15 - offsetY);
+            CGPathCloseSubpath(path);
+            
         } else {
             monster = [SKSpriteNode spriteNodeWithImageNamed:@"protectCreature2"];
+            
+            CGFloat offsetX = monster.frame.size.width * monster.anchorPoint.x;
+            CGFloat offsetY = monster.frame.size.height * monster.anchorPoint.y;
+            CGPathMoveToPoint(path, NULL, 0 - offsetX, 1 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 47 - offsetX, 1 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 47 - offsetX, 24 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 40 - offsetX, 43 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 28 - offsetX, 53 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 19 - offsetX, 53 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 8 - offsetX, 44 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 1 - offsetX, 26 - offsetY);
+            CGPathCloseSubpath(path);
         }
         
         monster.zPosition = 2;
         monster.position = CGPointMake(position * spaceOrder - giveDistanceToMonsters, monster.size.height / 2);
+        
+        //physics body for monster
+        monster.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+        monster.physicsBody.dynamic = YES;
+        monster.physicsBody.categoryBitMask = MonsterCategory;
+        monster.physicsBody.contactTestBitMask = MissileCategory;
+        monster.physicsBody.collisionBitMask = 1;
+        monster.zPosition = 2;
+        monster.position = CGPointMake(position * spaceOrder - giveDistanceToMonsters, monster.size.height / 2);
+
         
         [self addChild:monster];
     }
@@ -132,8 +175,13 @@
         int startPoint = [self getRandomNumberBetween:0 to:size.width];
         missile.position = CGPointMake(startPoint, size.height);
         
-        int endPoint = [self getRandomNumberBetween:0 to:size.width];
+        missile.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:missile.size.height/2];
+        missile.physicsBody.dynamic = NO;
+        missile.physicsBody.categoryBitMask = MissileCategory;
+        missile.physicsBody.contactTestBitMask = ExplosionCategory | MonsterCategory;
+        missile.physicsBody.collisionBitMask = 1;
         
+        int endPoint = [self getRandomNumberBetween:0 to:size.width];
         SKAction *move =[SKAction moveTo:CGPointMake(endPoint, 0) duration:15];
         SKAction *remove = [SKAction removeFromParent];
         [missile runAction:[SKAction sequence:@[move,remove]]];
