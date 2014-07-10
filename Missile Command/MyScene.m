@@ -8,16 +8,78 @@
 
 #import "MyScene.h"
 
+@interface MyScene () {
+    CGSize sizeGlobal;
+    
+    SKLabelNode *labelflowerBullets1;
+    SKLabelNode *labelflowerBullets2;
+    SKLabelNode *labelflowerBullets3;
+    SKLabelNode *labelMissilesExploded;
+    int position;
+    int monstersDead;
+    int missileExploded;
+    
+    int flowerBullets1;
+    int flowerBullets2;
+    int flowerBullets3;
+}
+
+@end
+
 @implementation MyScene
 
 - (id)initWithSize:(CGSize)size {
-    self = [super initWithSize:size];
-    
-    if (self) {
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+    if (self = [super initWithSize:size]) {
+        self.backgroundColor = [SKColor colorWithRed:(198.0/255.0) green:(220.0/255.0) blue:(54.0/255.0) alpha:1.0];
+        
+        position = size.width/3;
+        sizeGlobal = size;
+        [self addFlowerCommand];
+        
+        //Label Informing Missiles Exploded
+        labelMissilesExploded = [SKLabelNode labelNodeWithFontNamed:@"Hiragino-Kaku-Gothic-ProN"];
+        labelMissilesExploded.text = [NSString stringWithFormat:@"Missiles Exploded: %d",missileExploded];
+        labelMissilesExploded.fontSize = 30;
+        labelMissilesExploded.position = CGPointMake(size.width/2,size.height-labelMissilesExploded.frame.size.height);
+        labelMissilesExploded.zPosition = 3;
+        [self addChild:labelMissilesExploded];
+        
+        flowerBullets1 = 10;
+        flowerBullets2 = 10;
+        flowerBullets3 = 10;
+        
+        labelflowerBullets1 = [SKLabelNode labelNodeWithFontNamed:@"Hiragino-Kaku-Gothic-ProN"];
+        labelflowerBullets1.text = [NSString stringWithFormat:@"%d",flowerBullets1];
+        labelflowerBullets1.fontSize = 30;
+        labelflowerBullets1.position = CGPointMake(position-position/2,labelflowerBullets1.frame.size.height/2);
+        labelflowerBullets1.zPosition = 3;
+        [self addChild:labelflowerBullets1];
+        
+        labelflowerBullets2 = [SKLabelNode labelNodeWithFontNamed:@"Hiragino-Kaku-Gothic-ProN"];
+        labelflowerBullets2.text = [NSString stringWithFormat:@"%d",flowerBullets2];
+        labelflowerBullets2.fontSize = 30;
+        labelflowerBullets2.position = CGPointMake(position*2-position/2,labelflowerBullets2.frame.size.height/2);
+        labelflowerBullets2.zPosition = 3;
+        [self addChild:labelflowerBullets2];
+        
+        labelflowerBullets3 = [SKLabelNode labelNodeWithFontNamed:@"Hiragino-Kaku-Gothic-ProN"];
+        labelflowerBullets3.text = [NSString stringWithFormat:@"%d",flowerBullets3];
+        labelflowerBullets3.fontSize = 30;
+        labelflowerBullets3.position = CGPointMake(position*3-position/2,labelflowerBullets3.frame.size.height/2);
+        labelflowerBullets3.zPosition = 3;
+        [self addChild:labelflowerBullets3];
     }
     
     return self;
+}
+
+- (void)addFlowerCommand {
+    for (int i = 1; i <= 3; i++) {
+        SKSpriteNode *flower = [SKSpriteNode spriteNodeWithImageNamed:@"flower.png"];
+        flower.zPosition = 2;
+        flower.position = CGPointMake(position * i - position / 2, flower.size.height / 2);
+        [self addChild:flower];
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
