@@ -8,6 +8,8 @@
 
 #import "MyScene.h"
 
+#import "MenuScene.h"
+
 @interface MyScene () {
     CGSize sizeGlobal;
     
@@ -312,6 +314,55 @@
         
         [self addChild:bullet];
     }
+}
+
+- (void)didBeginContact:(SKPhysicsContact *)contact {
+    if ((contact.bodyA.categoryBitMask & ExplosionCategory) != 0 || (contact.bodyB.categoryBitMask & ExplosionCategory) != 0) {
+        // Collision Between Explosion and Missile
+        SKNode *missile = (contact.bodyA.categoryBitMask & ExplosionCategory) ? contact.bodyB.node : contact.bodyA.node;
+        [missile runAction:[SKAction removeFromParent]];
+        
+        //the explosion continues, because can kill more than one missile
+        NSLog(@"Missile destroyed");
+        
+        // Update Missile Exploded
+        missileExploded++;
+        [labelMissilesExploded setText:[NSString stringWithFormat:@"Missiles Exploded: %d",missileExploded]];
+        
+        if(missileExploded == 20){
+            SKLabelNode *ganhou = [SKLabelNode labelNodeWithFontNamed:@"Hiragino-Kaku-Gothic-ProN"];
+            ganhou.text = @"You win!";
+            ganhou.fontSize = 60;
+            ganhou.position = CGPointMake(sizeGlobal.width/2,sizeGlobal.height/2);
+            ganhou.zPosition = 3;
+            [self addChild:ganhou];
+        }
+        
+    } else {
+        // Collision Between Missile and Monster
+        SKNode *monster = (contact.bodyA.categoryBitMask & MonsterCategory) ? contact.bodyA.node : contact.bodyB.node;
+        SKNode *missile = (contact.bodyA.categoryBitMask & MonsterCategory) ? contact.bodyB.node : contact.bodyA.node;
+        [missile runAction:[SKAction removeFromParent]];
+        [monster runAction:[SKAction removeFromParent]];
+        
+        NSLog(@"Monster killed");
+        monstersDead++;
+        if(monstersDead == 6){
+            SKLabelNode *perdeu = [SKLabelNode labelNodeWithFontNamed:@"Hiragino-Kaku-Gothic-ProN"];
+            perdeu.text = @"You Lose!";
+            perdeu.fontSize = 60;
+            perdeu.position = CGPointMake(sizeGlobal.width/2,sizeGlobal.height/2);
+            perdeu.zPosition = 3;
+            [self addChild:perdeu];
+            [self moveToMenu];
+        }
+    }
+}
+
+- (void)moveToMenu {
+    SKTransition* transition = [SKTransition fadeWithDuration:2];
+    MenuScene* myscene = [[MenuScene alloc] initWithSize:CGSizeMake(CGRectGetMaxX(self.frame), CGRectGetMaxY(self.frame))];
+    [self.scene.view presentScene:myscene transition:transition];
 }
 
 - (int)positionOfWhichFlowerShouldBegin:(int)number {
